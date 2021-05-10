@@ -16,4 +16,12 @@ contract('Color NFT', ([someUser]) => {
         const name = await aColor.name();
         assert.equal(name, "Unique Colors");
     });
+
+    it('Color can be minted', async () => {
+        const balance0 = await aColor.balanceOf(someUser);
+        assert.equal(Number(balance0), 0);
+        await aColor.mint('somecolor', {from: someUser});
+        const balance1 = await aColor.balanceOf(someUser);
+        assert.isAbove(Number(balance1), 0);
+    });
 });
