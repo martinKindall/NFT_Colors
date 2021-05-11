@@ -64,4 +64,15 @@ contract('Color NFT', ([someUser, otherUser]) => {
         assert.equal(mintedColors[1], 'somecolor2');
         assert.equal(mintedColors[2], 'somecolor3');
     });
+
+    it('Listing colors with getter', async () => {
+        await aColor.mint('somecolor1', {from: someUser});
+        await aColor.mint('somecolor2', {from: someUser});
+        await aColor.mint('somecolor3', {from: someUser});
+
+        const colors = await aColor.getMintedColors();
+        assert.equal(colors[0], 'somecolor1');
+        assert.equal(colors[1], 'somecolor2');
+        assert.equal(colors[2], 'somecolor3');
+    });
 });

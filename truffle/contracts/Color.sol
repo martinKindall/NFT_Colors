@@ -19,4 +19,8 @@ contract Color is ERC721Enumerable  {
         _mint(msg.sender, _id);
         _colorExists[_color] = true;
     }
+
+    function getMintedColors() public view returns (string[] memory) {
+        return mintedColors;
+    }
 }
