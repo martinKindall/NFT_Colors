@@ -12,6 +12,8 @@ contract Color is ERC721Enumerable  {
     constructor() ERC721 ("Unique Colors", "UCO") {}
 
     function mint(string memory _color) public {
+        require(!_colorExists[_color], 'Color already exists!');
+
         mintedColors.push(_color);
         uint _id = mintedColors.length - 1;
         _mint(msg.sender, _id);

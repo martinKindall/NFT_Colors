@@ -30,4 +30,16 @@ contract('Color NFT', ([someUser, otherUser]) => {
         const tokenReceiver = result.receipt.from;
         assert.equal(tokenReceiver, someUser.toLowerCase());
     });
+
+    it('Color exists already', async () => {
+        await aColor.mint('somecolor', {from: someUser});
+        try {
+            await aColor.mint('somecolor', {from: someUser});
+        } catch(err) {
+            assert.equal(
+                err.reason, 
+                'Color already exists!'
+            );
+        }
+    });
 });
