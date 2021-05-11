@@ -42,4 +42,26 @@ contract('Color NFT', ([someUser, otherUser]) => {
             );
         }
     });
+
+    it('Listing colors', async () => {
+        await aColor.mint('somecolor1', {from: someUser});
+        await aColor.mint('somecolor2', {from: someUser});
+        await aColor.mint('somecolor3', {from: someUser});
+
+        const totalSupply = await aColor.totalSupply();
+
+        const colors = async () => {
+            return Promise.all([...Array(Number(totalSupply)).keys()].map(index => {
+                return aColor.mintedColors(index);
+            }));
+        };
+
+        assert.equal(await aColor.balanceOf(someUser), 3);
+        assert.equal(await aColor.totalSupply(), 3);
+
+        const mintedColors = await colors();
+        assert.equal(mintedColors[0], 'somecolor1');
+        assert.equal(mintedColors[1], 'somecolor2');
+        assert.equal(mintedColors[2], 'somecolor3');
+    });
 });
