@@ -1,6 +1,6 @@
 const Color = artifacts.require('Color');
 
-contract('Color NFT', ([someUser]) => {
+contract('Color NFT', ([someUser, otherUser]) => {
     let aColor;
 
     beforeEach(async () => {
@@ -22,10 +22,12 @@ contract('Color NFT', ([someUser]) => {
         const totalSupply0 = await aColor.totalSupply();
         assert.equal(totalSupply0, 0);
         assert.equal(Number(balance0), 0);
-        await aColor.mint('somecolor', {from: someUser});
+        const result = await aColor.mint('somecolor', {from: someUser});
         const balance1 = await aColor.balanceOf(someUser);
         assert.isAbove(Number(balance1), 0);
         const totalSupply = await aColor.totalSupply();
         assert.equal(totalSupply, 1);
+        const tokenReceiver = result.receipt.from;
+        assert.equal(tokenReceiver, someUser.toLowerCase());
     });
 });
