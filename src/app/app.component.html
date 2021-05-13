@@ -9,7 +9,10 @@
     <div class="col-4">
       <div class="form-group">
         <label for="token_color">Issue Token</label>
-        <input type="text" class="form-control" id="token_color" aria-describedby="writeColorCode" placeholder="Enter color in hex">
+        <input type="text" class="form-control"
+               id="token_color" aria-describedby="writeColorCode"
+               value="{{colorInput}}"
+               placeholder="Enter color in hex" (change)="colorInput = $event.target.value">
       </div>
     </div>
     <div class="col-4"></div>
@@ -17,7 +20,7 @@
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-      <button type="submit" class="btn btn-primary text-center">Mint</button>
+      <button type="submit" class="btn btn-primary text-center" (click)="mint()">Mint</button>
     </div>
     <div class="col-4"></div>
   </div>

@@ -10,21 +10,38 @@ import {ColorsContract} from "../ColorsContract";
 export class AppComponent implements OnInit {
   colorContract: ColorsContract | undefined;
   colors: string[] | undefined;
+  colorInput: string;
 
   constructor(private walletService: WalletService) {
+    this.colorInput = "#000000";
   }
 
   ngOnInit(): void {
     this.walletService.init()
       .then(colorContract => {
         this.colorContract = colorContract;
-        return colorContract.getColors();
-      })
-      .then((colors: string[]) => {
-        this.colors = colors;
+        return this.updateColors();
       })
       .catch(err => {
         console.error(err);
       });
+  }
+
+  mint() {
+    if (!!this.colorInput && this.colorInput.length === 7)
+    this.colorContract?.mint(this.colorInput)
+      .then(() => {
+        return this.updateColors();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  updateColors(): Promise<any> {
+    return this.colorContract?.getColors()
+      .then((colors) => {
+        this.colors = colors;
+      }) || Promise.resolve();
   }
 }
