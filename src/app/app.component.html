@@ -21,4 +21,9 @@
     </div>
     <div class="col-4"></div>
   </div>
+  <div class="row" *ngIf="colors != null">
+    <div *ngFor="let color of colors" class="col-4">
+      {{color}}
+    </div>
+  </div>
 </div>
