@@ -4,3 +4,11 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.token {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: white;
+}
+

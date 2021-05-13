@@ -28,14 +28,15 @@ export class AppComponent implements OnInit {
   }
 
   mint() {
-    if (!!this.colorInput && this.colorInput.length === 7)
-    this.colorContract?.mint(this.colorInput)
-      .then(() => {
-        return this.updateColors();
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    if (!!this.colorInput && this.colorInput.length === 7) {
+      this.colorContract?.mint(this.colorInput)
+        .then(() => {
+          return this.updateColors();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
   }
 
   updateColors(): Promise<any> {
