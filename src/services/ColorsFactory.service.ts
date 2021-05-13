@@ -8,7 +8,7 @@ export class ColorsFactory {
 
   public create(rawColorsContract: any): ColorsContract {
     const mint = (color: string) => Promise.resolve();
-    const getColors = () => Promise.resolve(['color1', 'color2']);
+    const getColors = () => rawColorsContract.methods.getMintedColors().call();
 
     return {mint, getColors};
   }
